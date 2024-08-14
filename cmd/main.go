@@ -39,11 +39,17 @@ func main() {
 			PrintLine()
 			continue
 		}
+		// Windows
 		cmd := exec.Command("ffplay", "-nodisp", "-autoexit", filename)
 		err = cmd.Start()
 		if err != nil {
-			fmt.Println("❌ 播放音频失败", err)
-			PrintLine()
+			// Termux
+			cmd = exec.Command("play-audio", filename)
+			err = cmd.Start()
+			if err != nil {
+				fmt.Println("❌ 播放音频失败", err)
+				PrintLine()
+			}
 			continue
 		}
 		err = cmd.Wait()
