@@ -10,7 +10,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"log"
 	"net/http"
 	"net/url"
 	"sort"
@@ -87,7 +86,7 @@ func GetTranslateResult(from string, to string, input string) (*TranslateResult,
 	}{}
 	err = json.Unmarshal(result, res)
 	if err != nil || res.Code != 0 || len(res.Result) == 0 || len(res.Result[0]) == 0 {
-		log.Fatalln("获取翻译结果失败:", err)
+		return nil, fmt.Errorf("获取翻译结果失败: %v", err)
 	}
 	res.Result[0][0].From = strings.Split(res.Type, "2")[0]
 	res.Result[0][0].To = strings.Split(res.Type, "2")[1]
