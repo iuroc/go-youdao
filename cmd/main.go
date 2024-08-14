@@ -49,8 +49,8 @@ func main() {
 			if err != nil {
 				fmt.Println("❌ 播放音频失败", err)
 				PrintLine()
+				continue
 			}
-			continue
 		}
 		err = cmd.Wait()
 		if err != nil {
